@@ -1,25 +1,25 @@
 account_key: {{ scout_account_key }}
-{% if scout_hostname is defined %}
+{% if scout_hostname is defined and scout_hostname %}
 hostname: {{ scout_hostname }}
 {% endif %}
-{% if scout_display_name is defined %}
+{% if scout_display_name is defined and scout_display_name %}
 display_name: {{ scout_display_name }}
 {% endif %}
-{% if scout_log_file is defined %}
+{% if scout_log_file is defined and scout_log_file %}
 log_file: {{ scout_log_file }}
 {% endif %}
-{% if scout_ruby_path is defined %}
+{% if scout_ruby_path is defined and scout_ruby_path %}
 ruby_path: {{ scout_ruby_path }}
 {% endif %}
-{% if scout_environment is defined %}
+{% if scout_environment is defined and scout_environment %}
 environment: {{ scout_environment }}
 {% endif %}
-{% if scout_roles is defined %}
+{% if scout_roles is defined and scout_roles %}
 roles: {{ scout_roles }}
 {% endif %}
-{% if scout_http_proxy is defined %}
+{% if scout_http_proxy is defined and scout_http_proxy %}
 http_proxy: {{ scout_http_proxy }}
 {% endif %}
-{% if scout_https_proxy is defined %}
+{% if scout_https_proxy is defined and scout_https_proxy %}
 https_proxy: {{ scout_https_proxy }}
 {% endif %}
