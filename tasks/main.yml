@@ -14,14 +14,25 @@
   when: ansible_distribution == 'Ubuntu'
   tags: [ 'monitoring', 'scout' ]
 
+- name: install the scoutd package deps
+  apt: name={{ item }} state=present
+  with_items:
+    - ruby1.9.1
+    - ruby1.9.1-dev
+  when: ansible_distribution == 'Ubuntu'
+  notify: restart scout
+  tags: [ 'monitoring', 'scout' ]
+
 - name: install the scoutd package
   apt: name=scoutd state=present
   when: ansible_distribution == 'Ubuntu'
+  notify: restart scout
   tags: [ 'monitoring', 'scout' ]
 
 - name: Install python-gnupg
   yum: name=python-gnupg
   when: ansible_distribution == "Fedora"
+  notify: restart scout
   tags: [ 'monitoring', 'scout' ]
 
 - name: Install the RedHat GPG key
@@ -42,6 +53,7 @@
 - name: Install the scoutd package
   yum: name=scoutd state=latest
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+  notify: restart scout
   tags: [ 'monitoring', 'scout' ]
 
 - name: Ensure the directory for the public key exists
@@ -54,10 +66,12 @@
 - name: Install libselinux-python bindings
   yum: name=libselinux-python state=present
   when: ansible_distribution == "Red Hat Enterprise Linux" or ansible_distribution == "CentOS"
+  notify: restart scout
   tags: [ 'monitoring', 'scout' ]
 
 - name: Copy scout_rsa.pub to the /var/lib/scoutd directory
   template: src=scout_rsa.pub dest=/var/lib/scoutd/scout_rsa.pub owner=scoutd group=scoutd mode=0600
+  notify: restart scout
   tags: [ 'monitoring', 'scout' ]
 
 - name: Set up scout config file
