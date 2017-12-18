@@ -17,8 +17,8 @@
 - name: install the scoutd package deps
   apt: name={{ item }} state=present
   with_items:
-    - ruby1.9.1
-    - ruby1.9.1-dev
+    - ruby
+    - ruby-dev
   when: ansible_distribution == 'Ubuntu'
   notify: restart scout
   tags: [ 'monitoring', 'scout' ]
