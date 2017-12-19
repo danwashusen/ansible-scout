@@ -1,9 +1,9 @@
 - name: restart scout
   systemd:
-    name: scout
+    name: scoutd
     daemon_reload: yes
   when: ansible_service_mgr == "systemd"
 
 - name: restart scout
-  service: name=scout state=restarted
+  service: name=scoutd state=restarted
   
