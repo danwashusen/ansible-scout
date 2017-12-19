@@ -1,0 +1,21 @@
+[Unit]
+Description=Scout Monitoring
+After=syslog.target network.target nss-lookup.target
+
+[Service]
+Type=simple
+PIDFile=/var/run/scoutd.pid
+OOMScoreAdjust=-999
+
+ExecStart=/usr/bin/scoutd --logfile=/var/log/scout/scoutd.log start
+ExecStop=/bin/kill $MAINPID
+ExecReload=/bin/kill -HUP $MAINPID
+
+KillMode=process
+Restart=on-failure
+
+User=scoutd
+Group=scoutd
+
+[Install]
+WantedBy=multi-user.target

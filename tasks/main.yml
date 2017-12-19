@@ -78,3 +78,13 @@
   template: src=scoutd.yml dest=/etc/scout/scoutd.yml owner=scoutd group=scoutd
   notify: restart scout
   tags: [ 'monitoring', 'scout' ]
+
+- name: Create systemd service file
+  template:
+    src=scoutd.service.j2
+    dest=/etc/systemd/system/scoutd.service
+    owner=root
+    group=root
+    mode=0644
+  when: ansible_service_mgr == "systemd"
+  tags: [ 'monitoring', 'scout' ]
