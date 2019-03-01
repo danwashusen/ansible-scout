@@ -5,12 +5,12 @@
   tags: [ 'monitoring', 'scout' ]
 
 - name: Install the Ubuntu apt-key
-  apt_key: url=https://archive.scoutapp.com/scout-archive.key
+  apt_key: url=https://archive.scoutapp.com/scout-archive.key state=absent
   when: ansible_distribution == 'Ubuntu'
   tags: [ 'monitoring', 'scout' ]
 
 - name: Set up the scout apt repository
-  apt_repository: repo='deb http://archive.scoutapp.com ubuntu main'
+  apt_repository: repo='deb http://archive.scoutapp.com ubuntu main' state=absent
   when: ansible_distribution == 'Ubuntu'
   tags: [ 'monitoring', 'scout' ]
 
